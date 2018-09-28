@@ -3,7 +3,8 @@
 
 var mongoose = require('mongoose'),
   Task = mongoose.model('Tasks'),
-  Challenge = mongoose.model('Challenges');
+  Challenge = mongoose.model('Challenges'),
+  User = mongoose.model('Users');
 
   exports.list_all_tasks = function(req, res) {
     var status = req.query.status
@@ -107,6 +108,7 @@ Challenge.findById(req.params.challengeId, function(err, challenge) {
 
 
 exports.update_a_challenge = function(req, res) {
+  console.log("updating: " + req.params.challengeId)
 Challenge.findOneAndUpdate({_id: req.params.challengeId}, req.body, {new: true}, function(err, challenge) {
   if (err)
     res.send(err);

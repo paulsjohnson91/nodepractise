@@ -1,6 +1,10 @@
 'use strict';
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+var mongoose = require('mongoose'),
+    Schema = mongoose.Schema,
+    bcrypt = require('bcrypt'),
+    SALT_WORK_FACTOR = 10,
+    MAX_LOGIN_ATTEMPTS = 5,
+    LOCK_TIME = 2 * 60 * 60 * 1000;
 
 
 var TaskSchema = new Schema({
@@ -37,6 +41,9 @@ var ChallengeSchema = new Schema({
   },
   tasks: [TaskSchema]
 });
+
+
+
 
 module.exports = mongoose.model('Tasks', TaskSchema);
 module.exports = mongoose.model('Challenges', ChallengeSchema);
